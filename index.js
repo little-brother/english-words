@@ -31,16 +31,29 @@ window.addEventListener('load', function() {
 	document.querySelector('#button-help').addEventListener('click', () => setPage('help'));
 	document.querySelector('#button-help-close').addEventListener('click', () => setPage('game'));
 
-	document.querySelector('#button-option').addEventListener('click', () => setPage('option'));
+	document.querySelector('#button-option').addEventListener('click', function () {
+		document.querySelector('#page-option').setAttribute('prev', 10 * getOption('word-length') + getOption('word-popularity')); 
+		setPage('option')
+	});
 	document.querySelector('#button-option-close').addEventListener('click', function () {
 		setPage('game');
-		setWord();
+		$word.setAttribute('hide-boxes', getOption('hide-boxes'));
+		if (document.querySelector('#page-option').getAttribute('prev') != 10 * getOption('word-length') + getOption('word-popularity'))
+			setWord();
 	});
+
+	var dictionaries = {
+		webster: 'https://www.merriam-webster.com/dictionary/',
+		cambridge: 'https://dictionary.cambridge.org/dictionary/english/',
+		google: 'https://translate.google.com/#en/'+ (navigator.language || navigator.userLanguage).substr(0, 2) + '/'
+	}
 
 	document.querySelector('#button-bookmarks').addEventListener('click', function () {
 		var bookmarks = (localStorage.getItem('bookmarks') || '').split(',').filter(b => !!b);
 		var $bookmarks = document.querySelector('#page-bookmarks #bookmarks');
 		$bookmarks.innerHTML = '';
+		var dict = getOption('dictionary');
+
 		bookmarks.forEach(function (bookmark) {
 			var word = words.find(w => w.word == bookmark);
 			if (!word)
@@ -48,7 +61,7 @@ window.addEventListener('load', function() {
 
 			var $e = document.createElement('tr');
 			$e.innerHTML = '<td><div>i</div></td><td>' + bookmark + '</td><td>&#10006;</td>';
-			$e.children[0].onclick = () => window.open('https://www.merriam-webster.com/dictionary/' + bookmark);
+			$e.children[0].onclick = () => window.open(dictionaries[dict] + bookmark);
 			$e.children[1].onclick = function () {
 				var audio_no = +this.getAttribute('audio-no') || 0;
 				play(word.audio[audio_no].url);
@@ -94,8 +107,8 @@ window.addEventListener('load', function() {
 		return document.querySelector('#' + opt + ' [current]').getAttribute('value');
 	}
 
-	['word-length', 'word-popularity', 'hide-boxes', 'ignore-misprints'].forEach(function (opt) {
-		var defaults = {'word-length': 1, 'word-popularity': 1, 'hide-boxes': 'no', 'ignore-misprints': 'no'};
+	['word-length', 'word-popularity', 'hide-boxes', 'ignore-misprints', 'dictionary'].forEach(function (opt) {
+		var defaults = {'word-length': 1, 'word-popularity': 1, 'hide-boxes': 'no', 'ignore-misprints': 'no', dictionary: 'webster'};
 		var $e = document.querySelector('#' + opt);
 		for(var i = 0; i < $e.children.length; i++)
 			$e.children[i].addEventListener('click', (event) => setOption(opt, event.target.getAttribute('value')));
@@ -180,7 +193,7 @@ window.addEventListener('load', function() {
 				.filter((w) => length == 1 && w.word.length < 6 || length == 2 && (w.word.length > 5 && w.word.length < 10) || length == 3 && w.word.length > 9)	
 		}
 
-		var _words = filter(errors);
+		var _words = Math.random() < 0.3 ? filter(errors) : [];
 		if (!_words.length)
 			_words = filter(words);
 		
