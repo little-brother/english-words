@@ -29,7 +29,7 @@ html,body { padding: 0; margin: 0; font: normal "Helvetica Neue", Helvetica, Ari
 #page-option .selector > div[value="3"] {background: #faa;}
 #page-option .selector > div[value="yes"] {background: #afa;}
 #page-option .selector > div[value="no"] {background: #faa;}
-#page-option #dictionary.selector > div {background: #eee;}
+#page-option #dictionary.selector > div {background: #eee; margin-bottom: 5px;}
 
 #page-game #button-bookmarks {width: 18px; height: 30px; overflow: hidden; background: white; position: relative; display: inline-block; float: left; cursor: pointer; top: 2px; margin-left: 5px;}
 #page-game #button-bookmarks::before {position: absolute; width: 18px; height: 18px; bottom: 0; left: 0; transform: rotate(45deg) translate(35%, 35%); content: ''; background: #aaf;}

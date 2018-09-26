@@ -45,7 +45,10 @@ window.addEventListener('load', function() {
 	var dictionaries = {
 		webster: 'https://www.merriam-webster.com/dictionary/',
 		cambridge: 'https://dictionary.cambridge.org/dictionary/english/',
-		google: 'https://translate.google.com/#en/'+ (navigator.language || navigator.userLanguage).substr(0, 2) + '/'
+		google: 'https://translate.google.com/#en/'+ (navigator.language || navigator.userLanguage).substr(0, 2) + '/',
+		macmillan: 'https://www.macmillandictionary.com/dictionary/british/',
+		oxford: 'https://en.oxforddictionaries.com/definition/',
+		farlex: 'https://www.thefreedictionary.com/'
 	}
 
 	document.querySelector('#button-bookmarks').addEventListener('click', function () {
@@ -240,4 +243,17 @@ window.addEventListener('load', function() {
 		document.querySelectorAll('.page').forEach($e => $e.removeAttribute('current'));
 		document.querySelector('#page-' + page).setAttribute('current', true);
 	}
+
+	history.pushState({}, '', window.location.pathname);
+	window.addEventListener('popstate', function(event) {
+		var page = document.querySelector('.page[current]');
+		if (page.id == 'page-main')
+			return history.back();
+
+		history.pushState(null, null, window.location.pathname);
+		if (page.id == 'page-game')
+			return setPage('main');
+
+		page.querySelector('.close').click();
+	}, false);
 });
