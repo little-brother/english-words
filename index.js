@@ -103,7 +103,9 @@ window.addEventListener('load', function() {
 		localStorage.setItem(opt, value);
 		for(var i = 0; i < $e.children.length; i++)
 			$e.children[i].removeAttribute('current');
-		$e.querySelector('[value="' + value + '"]').setAttribute('current', true);
+
+		var $curr = $e.querySelector('[value="' + value + '"]') || $e.querySelector('[value="' + $e.getAttribute('default') + '"]')
+		$curr.setAttribute('current', true);
 	}
 
 	function getOption(opt) {
@@ -111,11 +113,10 @@ window.addEventListener('load', function() {
 	}
 
 	['word-length', 'word-popularity', 'hide-boxes', 'ignore-misprints', 'dictionary'].forEach(function (opt) {
-		var defaults = {'word-length': 1, 'word-popularity': 1, 'hide-boxes': 'no', 'ignore-misprints': 'no', dictionary: 'webster'};
 		var $e = document.querySelector('#' + opt);
 		for(var i = 0; i < $e.children.length; i++)
 			$e.children[i].addEventListener('click', (event) => setOption(opt, event.target.getAttribute('value')));
-		setOption(opt, localStorage.getItem(opt) || defaults[opt]);
+		setOption(opt, localStorage.getItem(opt) ||  $e.getAttribute('default'));
 	})
 
 	function updateScore(delta) {
@@ -174,7 +175,7 @@ window.addEventListener('load', function() {
 				localStorage.setItem('errors', localStorage.getItem('errors') + ',' + word.word);
 				addBookmark();
 			}
-			
+
 			setTimeout(setWord, 2000);
 		}
 	})
@@ -186,14 +187,14 @@ window.addEventListener('load', function() {
 
 		var length = getOption('word-length');
 		var popularity = getOption('word-popularity');
-		var min = [0, 0, 1000, 4000][popularity];
-		var max = [0, 1000, 4000, words.length][popularity];
+		var min = [0, 0, 1000, 4000, 0][popularity];
+		var max = [0, 1000, 4000, words.length, words.length][popularity];
 
 		function filter(arr) {
 			return arr
 				.filter((w) => w.index > min && w.index < max)
 				.filter((w) => showed_words.indexOf(w.word) == -1)
-				.filter((w) => length == 1 && w.word.length < 6 || length == 2 && (w.word.length > 5 && w.word.length < 10) || length == 3 && w.word.length > 9)	
+				.filter((w) => length == 1 && w.word.length < 6 || length == 2 && (w.word.length > 5 && w.word.length < 10) || length == 3 && w.word.length > 9 || length == 4)	
 		}
 
 		var _words = Math.random() < 0.3 ? filter(errors) : [];

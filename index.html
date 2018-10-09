@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8"/> 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />	
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
 	<link href = "index.css" rel="stylesheet"/>
 	<script type="text/javascript">
@@ -46,6 +47,46 @@
 		<table id = "bookmarks" cellpadding = "0" cellspacing = "0"></table>
 	</div>
 
+	<div id = "page-option" class = "page center">
+		<div class = "caption">Option <div id = "button-option-close" class = "circle plus close" back = "text"></div></div>
+		
+		<div class = "wrapper">	
+			<div id = "word-length" class = "selector col4" title = "Word length" default = "1">
+				<div value = "1">Short</div>
+				<div value = "2">Normal</div>
+				<div value = "3">Long</div>
+				<div value = "4">Any</div>
+			</div>
+		
+			<div id = "word-popularity" class = "selector col4" title = "Word popularity" default = "1">
+				<div value = "1">Top</div>
+				<div value = "2">Basic</div>
+				<div value = "3">Usual</div>
+				<div value = "4">Any</div>
+			</div>
+
+			<div id = "ignore-misprints" class = "selector col2" title = "Ignore misprints" default = "no">
+				<div value = "no">No</div>
+				<div value = "yes">Yes</div>
+			</div>
+
+			<div id = "hide-boxes" class = "selector col2" title = "Hide char boxes" default = "no">
+				<div value = "no">No</div>
+				<div value = "yes">Yes</div>
+			</div>
+
+			<div id = "dictionary" class = "selector" title = "Dictionary" default = "google">
+				<div value = "google">Google</div>
+				<div value = "cambridge">Cambridge</div>
+				<div value = "webster">Webster</div>
+				<br>
+				<div value = "oxford">Oxford</div>
+				<div value = "macmillan">MacMillan</div>
+				<div value = "farlex">Farlex</div>
+			</div>
+		</div>
+	</div>
+
 	<div id = "page-help" class = "page absolute">
 		<div class = "caption">Help <div id = "button-help-close" class = "circle plus close" back = "text"></div></div>
 		
@@ -80,46 +121,13 @@
 			</p>
 			
 			<p>
-				Also see <a href = "https://little-brother.github.io/english-speech/">another project</a> to training pronounciation.
+				<div>See also</div>
+				<ul>
+					<li><a href = "https://little-brother.github.io/english-speech/" target = "_blank">training pronounciation</a></li>
+					<li><a href = "https://little-brother.github.io/english-phrasal-verbs/" target = "_blank">learning of phrasal verbs</a></li>
+					<li><a href = "https://little-brother.github.io/english-cards/" target = "_blank">word learning by images (prototype)</a></li>
+				</ul>
 			</p>
-		</div>
-	</div>
-
-	<div id = "page-option" class = "page center">
-		<div class = "caption">Option <div id = "button-option-close" class = "circle plus close" back = "text"></div></div>
-		
-		<div class = "wrapper">	
-			<div id = "word-length" class = "selector" title = "Word length">
-				<div value = "1">Short</div>
-				<div value = "2">Normal</div>
-				<div value = "3">Long</div>
-			</div>
-		
-			<div id = "word-popularity" class = "selector" title = "Word popularity">
-				<div value = "1">Top</div>
-				<div value = "2">Basic</div>
-				<div value = "3">Usual</div>
-			</div>
-
-			<div id = "ignore-misprints" class = "selector" title = "Ignore misprints">
-				<div value = "no">No</div>
-				<div value = "yes">Yes</div>
-			</div>
-
-			<div id = "hide-boxes" class = "selector" title = "Hide char boxes">
-				<div value = "no">No</div>
-				<div value = "yes">Yes</div>
-			</div>
-
-			<div id = "dictionary" class = "selector" title = "Dictionary">
-				<div value = "google">Google</div>
-				<div value = "cambridge">Cambridge</div>
-				<div value = "webster">Webster</div>
-				<br>
-				<div value = "oxford">Oxford</div>
-				<div value = "macmillan">MacMillan</div>
-				<div value = "farlex">Farlex</div>
-			</div>
 		</div>
 	</div>
 </body>
