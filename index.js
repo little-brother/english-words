@@ -1,4 +1,6 @@
 window.addEventListener('load', function() {
+	localStorage.setItem('word-version', 1);
+
 	var isMobile = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator && navigator.userAgent || ''));
 	var words = [];
 	var errors = [];
@@ -100,11 +102,12 @@ window.addEventListener('load', function() {
 
 	function setOption(opt, value) {
 		var $e = document.querySelector('#' + opt);
-		localStorage.setItem(opt, value);
+		var def = $e.getAttribute('default');
+		localStorage.setItem(opt, value || def);
 		for(var i = 0; i < $e.children.length; i++)
 			$e.children[i].removeAttribute('current');
 
-		var $curr = $e.querySelector('[value="' + value + '"]') || $e.querySelector('[value="' + $e.getAttribute('default') + '"]')
+		var $curr = $e.querySelector('[value="' + value + '"]') || $e.querySelector('[value="' + def + '"]')
 		$curr.setAttribute('current', true);
 	}
 
