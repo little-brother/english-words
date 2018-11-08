@@ -1,24 +1,25 @@
-* {margin: 0px; padding: 0px;} 
-html,body { padding: 0; margin: 0; font: normal "Helvetica Neue", Helvetica, Arial, sans-serif; height: 100%;}
+* {margin: 0; padding: 0;} 
+html, body { padding: 0; margin: 0; height: 100%;}
 
 .page {font-size: 24px;}
 .page:not([current]) {display: none !important;}
-.page .wrapper {margin: auto; position: relative;}
-.page .caption {position: fixed; text-align: center; right: 0; left: 0; color: #fff; background: #aaf; font-weight: bold; padding: 10px; text-transform: uppercase; z-index: 1;}
 .page.center {height: 100%; display: grid; }
+.page.center  .content {margin: auto; position: relative;}
 .page.absolute {position: absolute; top: 0; bottom: 0; left: 0; right: 0;}
+.page.absolute .content {margin: auto; position: absolute; top: 48px; right: 0; left: 0; bottom: 0; overflow: auto;}
 
-#page-main {text-align: center;}
-#page-main a {text-decoration: none; color: #000;}
+.page .caption {position: fixed; text-align: center; right: 0; left: 0; color: #fff; background: #aaf; font-weight: bold; padding: 10px; text-transform: uppercase; z-index: 10;}
+.page .caption > * {display: inline-block;}
+.page .caption .left {float: left; cursor: pointer;}
 
-#page-main .wrapper {top: -20px;}
-#page-main .logo::before {content: ' ';border-radius: 50%; padding: 10px; display: inline-block; background-size: contain; background-position: center; background-repeat: no-repeat; background-origin: content-box;}
-#page-main .logo {display: inline-block; margin: 0; font-size: 20px;}
-#page-main #forvo::before {background-image: url(https://static00.forvo.com/_presentation/img/forvo_og.png); width: 140px; height: 140px; }
-#page-main #canguro {width: 160px; vertical-align: top; margin-top: 15px;}
-#page-main #canguro::before {background-image: url(http://canguroenglish.com/img/canguro_logo.svg); background-color: #f9b800; width: 80px; height: 80px; }
-#page-main #loading {color: #bbb; padding: 10px 20px; margin-top: 10px; position: relative; left: 10px;} 
-#page-main #button-play {display: none; padding: 10px 20px; margin-top: 10px; text-align: center; cursor: pointer; border-radius: 5px; background: #0f0;}
+.page .content-padding {padding: 20px;}
+
+#page-start {text-align: center;}
+#page-start a {text-decoration: none; color: #000;}
+#page-start #logo {display: inline-block; margin: 0; background-image: url(https://static00.forvo.com/_presentation/img/forvo_og.png); width: 200px; height: 200px; }
+#page-start #loading {color: #bbb; padding: 10px 20px; margin-top: 10px; position: relative; left: 10px;} 
+#page-start #button-start {padding: 10px 20px; margin-top: 10px; text-align: center; cursor: pointer; border-radius: 5px; background: #0f0;}
+#page-start #loading ~ #button-start {display: none !important;}
 
 #page-option .selector {display: block; margin-bottom: 20px;}
 #page-option .selector::before{content: attr(title); display: block; text-align: left; margin-bottom: 5px;}
@@ -34,28 +35,28 @@ html,body { padding: 0; margin: 0; font: normal "Helvetica Neue", Helvetica, Ari
 #page-option .selector.col4 > div {width: 73px;}
 #page-option #dictionary.selector > div {background: #eee; margin-bottom: 5px;}
 
-#page-game #button-bookmarks {width: 18px; height: 30px; overflow: hidden; background: white; position: relative; display: inline-block; float: left; cursor: pointer; top: 2px; margin-left: 5px;}
-#page-game #button-bookmarks::before {position: absolute; width: 18px; height: 18px; bottom: 0; left: 0; transform: rotate(45deg) translate(35%, 35%); content: ''; background: #aaf;}
-#page-game #button-bookmarks[animation] {animation-duration: 1s; animation-name: animation-bookmarks; animation-iteration-count: 1;}
+#page-main #button-bookmarks {width: 18px; height: 30px; overflow: hidden; background: white; position: relative; display: inline-block; float: left; cursor: pointer; top: 2px; margin-left: 5px;}
+#page-main #button-bookmarks::before {position: absolute; width: 18px; height: 18px; bottom: 0; left: 0; transform: rotate(45deg) translate(35%, 35%); content: ''; background: #aaf;}
+#page-main #button-bookmarks[animation] {animation-duration: 1s; animation-name: animation-bookmarks; animation-iteration-count: 1;}
 @keyframes animation-bookmarks {from {background: gold;} to {background: white;}}
 
-#page-game #word {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; min-height: 100px;}
-#page-game #word::before {content: 'Score: ' attr(score); display: block; text-align: center; margin-bottom: 15px;}
-#page-game #word > div {display: inline-block; margin: 5px; padding: 10px; background: #eee; width: 20px; text-align: center; color: #eee; font-weight: bold;}
-#page-game #word[hide-boxes="yes"] > div:not([correct]) {display: none !important;}
-#page-game #word > div[correct="true"] {color: #090;}
-#page-game #word > div[correct="false"] {color: #f00;}
-#page-game #word > div[correct="false"]::before {content: attr(char); font-size: 14px; width: 18px; top: 100%; position: absolute;}
+#page-main #word {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; min-height: 100px;}
+#page-main #word::before {content: 'Score: ' attr(score); display: block; text-align: center; margin-bottom: 15px;}
+#page-main #word > div {display: inline-block; margin: 5px; padding: 10px; background: #eee; width: 20px; text-align: center; color: #eee; font-weight: bold;}
+#page-main #word[hide-boxes="yes"] > div:not([correct]) {display: none !important;}
+#page-main #word > div[correct="true"] {color: #090;}
+#page-main #word > div[correct="false"] {color: #f00;}
+#page-main #word > div[correct="false"]::before {content: attr(char); font-size: 14px; width: 18px; top: 100%; position: absolute;}
 
-#page-game #word[density="1"] > div {margin: 2px;}
-#page-game #word[density="2"] > div {margin: 2px; padding: 10px 5px;}
-#page-game #word[density="3"] > div {margin: 2px; padding: 10px 2px;}
+#page-main #word[density="1"] > div {margin: 2px;}
+#page-main #word[density="2"] > div {margin: 2px; padding: 10px 5px;}
+#page-main #word[density="3"] > div {margin: 2px; padding: 10px 2px;}
 
-#page-game #input {width: 1px; height: 1px; border: none; opacity: 0;}
-#page-game #debug {position: absolute; bottom: 0; left: 0; right: 0; text-align: center; color: red; padding: 10px;}
-#page-game #debug:empty {display: none;} 
+#page-main #input {width: 1px; height: 1px; border: none; opacity: 0;}
+#page-main #debug {position: absolute; bottom: 0; left: 0; right: 0; text-align: center; color: red; padding: 10px;}
+#page-main #debug:empty {display: none;} 
 
-#page-bookmarks #bookmarks {margin-top: 50px; padding: 20px; overflow: auto; width: 100%;}
+#page-bookmarks #bookmarks {padding: 20px; overflow: auto; width: 100%;}
 #page-bookmarks #bookmarks:empty::after {content: 'The list is empty';}
 
 #page-bookmarks #bookmarks td {padding: 5px 0; border-bottom: 1px dashed #bbb; }
@@ -63,15 +64,13 @@ html,body { padding: 0; margin: 0; font: normal "Helvetica Neue", Helvetica, Ari
 #page-bookmarks #bookmarks td:nth-child(1) div {content: 'i'; background: #aaf; cursor: pointer; border-radius: 50%; width: 24px; height: 24px; line-height: 24px; font-size: 20px; font-weight: bold; color: white; display: inline-table; text-align: center;}
 #page-bookmarks #bookmarks td:nth-child(3) {width: 30px; text-align: right; cursor: pointer;}
 
-#page-help #content {margin-top: 50px; padding: 20px; overflow: auto;}
-#page-help #content p {margin-bottom: 20px;}
-#page-help #content a {text-decoration: none;}
-#page-help #content ul {margin-left: 30px;}
+#page-help .content p {margin-bottom: 20px;}
+#page-help .content a {text-decoration: none;}
+#page-help .content ul {margin-left: 30px;}
 
-.button {cursor: pointer; float: right; margin: 0 10px;}
-.close {position: absolute !important; cursor: pointer; transform: rotate(45deg); z-index: 10; top: 2px; right: 2px; margin: 2px 10px;}
-
-.circle {border-radius: 100%; position: relative; display: inline-block; width: 40px; height: 40px;}
-.circle.plus:before, .circle.plus:after {content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #fff;}
-.circle.plus:before {width: 6px; margin: 6px auto;}
-.circle.plus:after {margin: auto 6px; height: 6px;}
+.button {padding: 10px 30px; text-align: center; cursor: pointer; border-radius: 5px; background: #0f0; display: inline-block;}
+.caption-button {cursor: pointer; float: right; margin: 0 10px;}
+.close {position: absolute !important; cursor: pointer; transform: rotate(45deg); z-index: 10; border-radius: 100%; top: 2px; right: 2px; margin: 2px 10px; display: inline-block; width: 40px; height: 40px;}
+.close::before, .close::after {content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #fff;}
+.close::before {width: 6px; margin: 6px auto;}
+.close::after {margin: auto 6px; height: 6px;}
