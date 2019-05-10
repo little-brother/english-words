@@ -145,6 +145,7 @@ window.addEventListener('load', function() {
 	$input.addEventListener('keydown', (event) => (event.keyCode == 13) ? updateScore(-10) || addBookmark() || setWord() : null);
 	$input.addEventListener('input', function (event) {
 		var char = (this.value || '').slice(-1);
+		this.value = '';
 		event.stopImmediatePropagation();
 
 		$debug.innerHTML = '';
@@ -153,7 +154,6 @@ window.addEventListener('load', function() {
 		if (char == ' ' || char == '') {
 			current_audio_no = (current_audio_no + 1) % word.audio.length;
 			play(word.audio[current_audio_no].url);
-			this.value = this.value.slice(0, -1);
 			return false;
 		}
 
@@ -226,8 +226,8 @@ window.addEventListener('load', function() {
 			$e.innerHTML = uw[i];
 			$word.appendChild($e);
 		}
-
-		$word.setAttribute('hide-boxes', getOption('hide-boxes'));
+		
+		$word.setAttribute('hide-boxes', 'no');
 		$word.setAttribute('density', 0);
 		if ($word.offsetWidth > $word.parentElement.offsetWidth)
 			$word.setAttribute('density', 1);
@@ -235,6 +235,8 @@ window.addEventListener('load', function() {
 			$word.setAttribute('density', 2);
 		if ($word.offsetWidth > $word.parentElement.offsetWidth)
 			$word.setAttribute('density', 3);
+		
+		$word.setAttribute('hide-boxes', getOption('hide-boxes'));
 	}
 
 	function play(url) {
